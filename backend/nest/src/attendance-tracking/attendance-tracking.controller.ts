@@ -131,48 +131,7 @@ export class AttendanceTrackingController {
       month,
     );
   }
-  /*@Put('/updateEmployee/:id')
-  async updateEmployeeAndAttendance(
-    @Param('id') id: string,
-    @Body() updateEmployeeDto: Employee,
-  ): Promise<Employee> {
-    try {
-      // Check if employee exists
-      const existingEmployee = await this.prisma.employee.findUnique({
-        where: { id },
-        include: { attendanceRecord: true },
-      });
-      if (!existingEmployee) {
-        throw new NotFoundException(`Employee with ID ${id} not found.`);
-      }
-
-      // Remove the id property from updateEmployeeDto
-      const { id: employeeId, ...updateData } = updateEmployeeDto;
-
-      // Update employee
-      const updatedEmployee = await this.prisma.employee.update({
-        where: { id },
-        data: updateData, // Pass only the fields that need to be updated
-      });
-
-      // Update attendance records associated with the employee
-      const updatedAttendanceRecords: AttendanceRecord[] = [];
-      for (const attendanceRecord of existingEmployee.attendanceRecord) {
-        const updatedAttendanceRecord =
-          await this.prisma.attendanceRecord.update({
-            where: { id: attendanceRecord.id },
-            data: { employeeId: updatedEmployee.id },
-          });
-        updatedAttendanceRecords.push(updatedAttendanceRecord);
-      }
-
-      return updatedEmployee;
-    } catch (error) {
-      throw new Error(
-        `Failed to update employee and attendance records: ${error.message}`,
-      );
-    }
-  }*/
+ 
   @Get('with-attendance')
   async findAllWithAttendance(): Promise<any[]> {
     return this.prisma.user.findMany({
@@ -224,13 +183,11 @@ export class AttendanceTrackingController {
     }
   }
   private sendReminderMessage(number) {
-    console.log('bonjour'); // Fetch all users
 
-    // Download the helper library from https://www.twilio.com/docs/node/install
-    // Find your Account SID and Auth Token at twilio.com/console
-    // and set the environment variables. See http://twil.io/secure
-    const accountSid = 'ACeac715d64064777d95e955b0a92ea6a0';
-    const authToken = '841a362976a7d8a940efc786dc2fdd05';
+
+   
+    const accountSid = '';
+    const authToken = '';
     const client = require('twilio')(accountSid, authToken);
     client.messages
       .create({
