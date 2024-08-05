@@ -1,0 +1,62 @@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Announcement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+                                                  
+                                                  <form   [formGroup]="updateForm" *ngIf="updateForm"  >
+                                                   
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">Name :</label>
+                                                          <input type="text" class="form-control" value="" id="name"  name ="name"  formControlName="name"    placeholder="Tapez le nom">
+                                                         
+                                                      </div>
+                                                      <div class="form-group">
+                                                          <label for="capacite">Date :</label>
+                                                          <input type="date" class="form-control" id="date" name="date" formControlName="date"  placeholder="Capacité">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="capacite">Duration :</label>
+                                                        <input type="text" class="form-control" id="duration" name="duration" formControlName="duration"  placeholder="duration">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Université">Shift</label>
+                                                        <select class="form-control" id="shift" name="shift"  formControlName="shift"  required>
+                                                            <option >DAY_ONLY</option>
+                                                            <option>NIGHT_ONLY</option>
+                                                            <option>BOTH_SHIFTS</option>                                                       
+                                                        </select>
+                                                       </div>
+                                                     
+                                                       <div class="modal-footer">
+                                                        <button
+                                                          type="submit"
+                                                          (click)="updateholiday()"
+                                                          class="btn btn-primary"
+                                                          data-bs-dismiss="modal"
+                                                        >
+                                                          Submit
+                                                        </button>
+                                                        <button
+                                                          type="button"
+                                                          class="btn btn-secondary"
+                                                          data-bs-dismiss="modal"
+                                                        >
+                                                          Close
+                                                        </button>
+                                                      </div>                                                  </form>
+
+                                                </div>
+                                            </div>
+                                            <!-- Input group -->
+                                        </div>
+                                    <!-- [ Main Content ] end -->
+
+  
+  <script src="assets/js/vendor-all.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>
+  

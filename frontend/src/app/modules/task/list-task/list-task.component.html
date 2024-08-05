@@ -1,0 +1,50 @@
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="container">
+                    <div class="d-flex align-items-center justify-content-end my-3">
+                        <div id="bulk-select-replace-element">
+                            <button class="btn btn-primary btn-sm" (click)="Openpopup()" type="button">
+                                <i class="fas fa-plus me-1"></i>
+                                New Task
+                            </button>
+                        </div>
+                    </div>                    
+                    <div id="tableExample">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Deadline</th>
+                                        <th scope="col">Priority</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Assigned To</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of tasks" cdkDrag [attr.draggableId]="task.id" (dragstart)="onDragStart($event, task.id)" @itemDrag>
+                                        <td>{{ task.title }}</td>
+                                        <td>{{ task.deadline }}</td>
+                                        <td>{{ task.priority }}</td>
+                                        <td>{{ task.status }}</td>
+                                        <td>{{ task.assignedToEmail }}</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm me-2" (click)="Openpopupupdate()">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <img src="../../../../assets/images/trash.png" alt="Trash" class="trash"
+                    [class.shake]="isDragging" (dragover)="allowDrop($event)" (drop)="onDelete($event)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

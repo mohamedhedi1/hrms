@@ -1,0 +1,33 @@
+
+<div class="auth-wrapper">
+  <div class="auth-content">
+      <div class="auth-bg">
+          <span class="r"></span>
+          <span class="r s"></span>
+          <span class="r s"></span>
+          <span class="r"></span>
+      </div>
+      <div class="card">
+          <div class="card-body text-center">
+              <div class="mb-4">
+                  <i class="feather icon-unlock auth-icon"></i>
+              </div>
+              <form (ngSubmit)="authenticate()">
+              
+              <h3 class="mb-4">Login</h3>
+              <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Email" required [(ngModel)]="authRequest.email" name="email">
+              </div>
+              <div class="input-group mb-4">
+                  <input type="password" class="form-control" placeholder="password" required [(ngModel)]="authRequest.password" name="password">
+              </div>
+              
+              <button class="btn btn-primary shadow-2 mb-4" type="submit">Login</button>
+              <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+              </form>
+              <p class="mb-2 text-muted">Forgot password? <a [routerLink]="['/resetpassword']">Reset</a></p>
+
+          </div>
+      </div>
+  </div> 
+</div>

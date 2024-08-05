@@ -1,0 +1,194 @@
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/node_modules/primeng/resources/themes/nova-light/theme.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/node_modules/primeng/resources/primeng.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+  rel="stylesheet"
+/>
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <h3 class="text-uppercase">Attendance</h3>
+          <br /><br />
+          <b>My Statistics for this month :</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-graph success font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-right">
+                    <h3>Total Half Shift</h3>
+                    <span>{{ halfShifts }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="media-body text-left">
+                    <h3 class="danger">Total Full Shift</h3>
+                    <span>{{ fullShifts }}</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="icon-rocket danger font-large-2 float-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="media-body text-left">
+                    <h3 class="warning">Total Quarter Shift</h3>
+                    <span>{{ quarterShifts }}</span>
+                  </div>
+                  <div class="align-self-center">
+                    <i
+                      class="icon-pie-chart warning font-large-2 float-right"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="align-self-center">
+                    <i class="icon-pencil primary font-large-2 float-left"></i>
+                  </div>
+                  <div class="media-body text-right">
+                    <h3>Total Absent</h3>
+                    <span>{{ absences }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card form-card">
+            <div class="card-body">
+              <h2 class="card-title mb-4">Create Attendance for Today</h2>
+              <form (ngSubmit)="submitForm()" class="animated-form">
+                <div class="mb-3">
+                  <label for="status" class="form-label">Status:</label>
+                  <select
+                    [(ngModel)]="selectedStatus"
+                    name="status"
+                    id="status"
+                    class="form-select"
+                  >
+                    <option value="PRESENT">Present</option>
+                    <option value="ABSENT">Absent</option>
+                  </select>
+                </div>
+
+                <div *ngIf="selectedStatus === 'PRESENT'" class="mb-3">
+                  <label for="shiftType" class="form-label">Shift Type:</label>
+                  <select
+                    [(ngModel)]="selectedShiftType"
+                    name="shiftType"
+                    id="shiftType"
+                    class="form-select"
+                  >
+                    <option value="QUARTER_SHIFT">Quarter Shift</option>
+                    <option value="HALF_DAY">Half Day</option>
+                    <option value="FULL_DAY">Full Day</option>
+                  </select>
+                </div>
+
+                <div *ngIf="selectedStatus === 'ABSENT'" class="mb-3">
+                  <label for="absentReason" class="form-label"
+                    >Absent Reason:</label
+                  >
+                  <input
+                    type="text"
+                    [(ngModel)]="absentReason"
+                    name="absentReason"
+                    id="absentReason"
+                    class="form-control"
+                  />
+                </div>
+                <div class="card flex justify-content-center">
+                  <p-toast
+                    [showTransformOptions]="'translateY(100%)'"
+                    [showTransitionOptions]="'1000ms'"
+                    [hideTransitionOptions]="'1000ms'"
+                    [showTransformOptions]="'translateX(100%)'"
+                  ></p-toast>
+                  <button type="submit" class="btn btn-primary">
+                    Create Attendance
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card list-card">
+            <div class="card-body">
+              <h2 class="card-title mb-4">My Attendances</h2>
+              <app-list-attendance></app-list-attendance>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

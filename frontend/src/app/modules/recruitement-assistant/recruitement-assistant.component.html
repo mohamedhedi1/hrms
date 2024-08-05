@@ -1,0 +1,88 @@
+<section style="background-color: #eee">
+  <div class="container py-2" id="chatContainer">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-4">
+        <div class="card" id="chat1" style="border-radius: 15px">
+          <div
+            class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+            style="border-top-left-radius: 15px; border-top-right-radius: 15px"
+          >
+            <img
+              src="assets/images/image.png"
+              alt="Chatbot Avatar"
+              style="
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+              "
+            />
+            <p class="mb-0 fw-bold">
+              Hi, I'm Sam, your dependable Recruitment Assistant Chatbot, here
+              to elevate your hiring experience.
+            </p>
+          </div>
+          <div class="card-body">
+            <div
+              *ngFor="let inputMessage of inputMessages; let i = index"
+              class="message"
+            >
+              <div
+                class="input-message"
+                *ngIf="!isResponding || i !== inputMessages.length - 1"
+              >
+                <p class="message-text1">
+                  <b style="color: rgb(131, 131, 244)">
+                    {{ user.firstname }}
+                  </b>
+                  : {{ inputMessage }}
+                </p>
+              </div>
+              <div class="response-message">
+                <p class="message-text2">
+                  <b style="color: rgb(5, 5, 122)">Sam </b> :
+                  {{ responseMessages[i] }}
+                </p>
+              </div>
+
+              <div
+                class="input-message"
+                *ngIf="isResponding && i === inputMessages.length - 1"
+              >
+                <div class="my message">
+                  <span class="jumping-dots">
+                    <span class="dot-1"></span>
+                    <span class="dot-2"></span>
+                    <span class="dot-3"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input field for new message -->
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="newMessage"
+                placeholder="Type your message here..."
+              />
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="sendMessage()"
+                [disabled]="isResponding"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button id="toggleChatBtn" (click)="toggleChat()">
+  <i class="fas fa-comments"></i>
+</button>

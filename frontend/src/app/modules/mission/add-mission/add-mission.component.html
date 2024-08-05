@@ -1,0 +1,96 @@
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Add Mission</h5>
+                </div>
+                <div class="card-body">
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          <label for="title">title</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            formControlName="title"
+                            pattern="[A-Za-z]+"
+                            required
+                            placeholder="Ex. mission one" />
+                         
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">description</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="description"
+                              formControlName="description"
+                              pattern="[A-Za-z]+"
+                              required
+                              
+                            />
+                           
+                          </div>
+
+                          <div class="form-group">
+                            <label for="startDate">startDate</label>
+                            <input
+                              type="date"
+                              class="form-control"
+                              id="startDate"
+                              formControlName="startDate"
+                            />
+                           
+                          </div>
+                          <div class="form-group">
+                            <label for="endDate">endDate</label>
+                            <input
+                              type="date"
+                              class="form-control"
+                              id="endDate"
+                              formControlName="endDate"
+                            />
+                           
+                          </div>
+                          
+  
+  
+                        <label for="userId">Available employees</label>
+                        <div *ngFor="let user of availableUsers">
+                          <label class="checkbox-label">
+                            <input
+                              class="styled-checkbox"
+                              type="checkbox"
+                              (change)="onuserSelect(user, $event)"
+                            />
+                            {{ user.firstname }}   {{ user.lastname }}
+                          </label>
+                        </div>
+  
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          [disabled]="myForm.invalid"
+                        >
+                          Add
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

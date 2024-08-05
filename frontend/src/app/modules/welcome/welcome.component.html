@@ -1,0 +1,191 @@
+<script>
+
+  const chatMessages = document.querySelector('.chat-messages');
+  const chatMessagesContent = document.querySelector('.chat-messages-content');
+  const chatForm = document.querySelector('.chat-form');
+
+  function init() {
+    const lastEl = chatMessagesContent.lastElementChild;
+    chatMessages.scrollTo(0, lastEl.offsetTop);
+  }
+
+  function onChatSubmit(evt) {
+    evt.preventDefault();
+  }
+
+  init();
+
+  chatForm.addEventListener('submit', onChatSubmit);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="message"></div>
+
+<div class="chat-widget" id="chatWidget">
+
+  <!-- chat toggle -->
+  <input id="chat-widget-toggle" class="chat-widget-toggle" type="checkbox">
+
+  <!-- chat close button -->
+  <label title="close chat" for="chat-widget-toggle" class="chat-widget-button chat-close-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" version="1.1" height="64" viewBox="0 0 64 64"
+      enable-background="new 0 0 64 64">
+      <g>
+        <path fill="#1D1D1B"
+          d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z" />
+      </g>
+    </svg>
+  </label>
+
+  <div class="chat-box">
+    <!-- chat user info     -->
+    <div class="chat-avatar-box">
+      <img class="chat-avatar"
+        src="https://cdn.pixabay.com/photo/2017/08/30/17/27/business-woman-2697954_960_720.jpg" />
+    </div>
+
+    <div class="chat-message-box">
+      <!--  chat header -->
+      <div class="chat-header">
+        <h1 class="chat-title">
+          <span class="chat-title-primary">ResumeBot</span>
+          <span class="chat-title-sub">Assistant</span>
+        </h1>
+      </div>
+
+      <!--   chat message  -->
+      <div class="chat-messages">
+        <div class="chat-messages-content">
+          <ng-container *ngFor="let message of messages; let i = index">
+            <div *ngIf="i % 2 === 0; else oddMessage" class="chat-message -right">
+              <div class="chat-message-avatar">
+
+              </div>
+              <div class="chat-message-text">
+                {{ message }}
+              </div>
+            </div>
+            <ng-template #oddMessage>
+              <div class="chat-message -left">
+                <div class="chat-message-avatar">
+                  <img src="https://cdn.pixabay.com/photo/2017/08/30/17/27/business-woman-2697954_960_720.jpg" alt=""
+                    class="chat-avatar -small">
+                </div>
+                <div class="chat-message-text">
+                  {{ message }}
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+
+
+      <!-- chat input box  -->
+      <div class="chat-form-box">
+        <form [formGroup]="myForm" (ngSubmit)="sendMessage()" class="chat-form" id="chat-form" name="chat-form">
+          <input class="chat-form-input" type="text" placeholder="Type your message...." formControlName="msg">
+          <button title="send message" type="submit" [disabled]="this.myForm.value.msg.length===0"
+            class="chat-form-button">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="535.5px" height="535.5px"
+              viewBox="0 0 535.5 535.5" style="enable-background:new 0 0 535.5 535.5;">
+              <polygon points="0,497.25 535.5,267.75 0,38.25 0,216.75 382.5,267.75 0,318.75" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- chat open button -->
+  <label title="open chat" for="chat-widget-toggle" class="chat-widget-button chat-open-button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 2H3a2 2 0 00-2 2v12a2 2 0 002 2h4l2 3 3-3h5a2 2 0 002-2V4a2 2 0 00-2-2z"></path>
+    </svg>
+
+  </label>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<header style="background-color: #f8f9fa; padding: 10px 20px; text-align: center;">
+  <h1 style="color: #0d6efd;">HR Website</h1>
+  <nav>
+    <ul style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px;">
+      <li><a href="#" style="text-decoration: none; color: #0d6efd; font-weight: bold;">Home</a></li>
+      <li><a href="#" style="text-decoration: none; color: #0d6efd; font-weight: bold;">About</a></li>
+      <li><a href="#" style="text-decoration: none; color: #0d6efd; font-weight: bold;">Services</a></li>
+      <li><a routerLink="login" style="text-decoration: none; color: #0d6efd; font-weight: bold;">Sign in</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main style="padding: 20px;">
+  <section>
+    <h2 style="color: #666;">Welcome to Our HR Website</h2>
+    <p style="color: #666;">This is the homepage of our HR website. Lorem ipsum dolor sit amet, consectetur adipiscing
+      elit.</p>
+    <img src="assets/images/hero_1.jpg" alt="Image 1" style="width: 100%; height: auto; margin-bottom: 10px;">
+    <img src="assets/images/hero_2.jpg" alt=" Image 2" style="width: 100%; height: auto; margin-bottom: 10px;">
+  </section>
+</main>
+
+<footer style="background-color: #343a40; color: white; text-align: center; padding: 10px;">
+  <p>&copy; 2024 HR Website. All rights reserved.</p>
+</footer>

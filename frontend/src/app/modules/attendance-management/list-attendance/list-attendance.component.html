@@ -1,0 +1,40 @@
+<div class="pcoded-wrapper">
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-end my+3"></div>
+
+        <div
+          id="tableExample"
+          data-list='{"valueNames":["name","job","date","status","reason","shift"],"page":5,"pagination":true}'
+        >
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Reason</th>
+                  <th>Shift</th>
+                </tr>
+              </thead>
+              <tbody class="list" id="bulk-select-body">
+                <!-- Your data goes here -->
+                @for (record of user.attendanceRecord; track record) {
+                <tr>
+                  <td>{{ record.date }}</td>
+                  <td>{{ record.status }}</td>
+                  <td>{{ record.absent_reason }}</td>
+                  <td>{{ record.shiftType }}</td>
+                </tr>
+                }
+                <!-- Repeat the above row structure for each data entry -->
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination d-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

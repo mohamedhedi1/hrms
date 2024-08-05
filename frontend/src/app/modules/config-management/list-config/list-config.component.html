@@ -1,0 +1,85 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="container">
+                            <!-- Edit Button -->
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-outline-primary btn-sm float-right"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModalAdd">Edit</button>
+                                </div>
+                                <div class="modal fade" id="exampleModalAdd" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <app-update-config></app-update-config>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id='exampleModalupdate' role="dialog" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-blue order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">Company: {{item.companyName}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-green order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">Address: {{item.address}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-yellow order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">Pay Day: {{item.payDay}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-pink order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">Delay before Payment:
+                                                {{item.delayBeforePayment}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-blue order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">CNSS Affiliation: {{item.cnssAffiliation}}
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-green order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">CNSS Rate: {{item.cnssrate}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-3" *ngFor="let item of data; let i = index">
+                                    <div class="card bg-c-yellow order-card">
+                                        <div class="card-block">
+                                            <h1 class="m-b-20 black-text">CSS Rate: {{item.cssrate}}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

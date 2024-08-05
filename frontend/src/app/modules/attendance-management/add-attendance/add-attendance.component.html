@@ -1,0 +1,175 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="calendar-container">
+        <div class="month-nav">
+          <button (click)="switchMonth(-1)" class="btn nav-button">
+            <span class="bi bi-arrow-left"></span>
+          </button>
+          <h2>{{ currentMonthYear }}</h2>
+          <button (click)="switchMonth(1)" class="btn nav-button">
+            <span class="bi bi-arrow-right"></span>
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered smaller-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                @for(day of daysInMonth;track day){
+                <th>{{ day }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let employee of users; let i = index">
+                <tr [class.even-row]="i % 2 !== 0">
+                  <td class="employee-column">{{ employee.firstname }}</td>
+                  @for(day of daysInMonth;track day){
+                  <td>
+                    <div class="button-container">
+                      <button
+                        class="btn btn-primary small-button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day)"
+                      >
+                        P
+                      </button>
+                      <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Modal Heading</h4>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                              ></button>
+                            </div>
+                            <!-- Modal body -->
+                            <p>Select Shift type please :</p>
+                            <div>
+                              <input
+                                type="radio"
+                                id="halfDayRadio"
+                                name="durationRadio"
+                                (change)="choose(0)"
+                              />
+                              <label for="halfDayRadio">Half Day</label>
+                            </div>
+
+                            <div>
+                              <input
+                                type="radio"
+                                id="quarterDayRadio"
+                                name="durationRadio"
+                                (change)="choose(1)"
+                              />
+                              <label for="quarterDayRadio">Quarter Day</label>
+                            </div>
+
+                            <div>
+                              <input
+                                type="radio"
+                                id="fullDayRadio"
+                                name="durationRadio"
+                                (change)="choose(2)"
+                              />
+                              <label for="fullDayRadio">Full Day</label>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-primary"
+                                (click)="handleUpdate()"
+                              >
+                                Update
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="button-container">
+                      <button
+                        class="btn btn-danger small-button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal2"
+                        (click)="openModal(employee, day)"
+                      >
+                        A
+                      </button>
+
+                      <div class="modal fade" id="myModal2">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Modal Heading</h4>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                              ></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                              <div class="mb-3">
+                                <label for="absenceReason" class="form-label"
+                                  >Reason for Absence:</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="absenceReason"
+                                  name="absenceReason"
+                                  [(ngModel)]="absenceReason"
+                                />
+                              </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-primary"
+                                (click)="updateAttendanceRecord()"
+                              >
+                                Update
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  }
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

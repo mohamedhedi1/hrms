@@ -1,0 +1,45 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Allowance</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="updateForm" (ngSubmit)="updateConfig()">
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">Company Name</label>
+                    <input type="text" class="form-control" id="companyName" formControlName="companyName">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" formControlName="address">
+                </div>
+                <div class="mb-3">
+                    <label for="payDay" class="form-label">Pay Day</label>
+                    <input type="text" class="form-control" id="payDay" formControlName="payDay">
+                </div>
+                <div class="mb-3">
+                    <label for="delayBeforePayment" class="form-label">Delay Before Payment</label>
+                    <input type="text" class="form-control" id="delayBeforePayment"
+                        formControlName="delayBeforePayment">
+                </div>
+                <div class="mb-3">
+                    <label for="cnssAffiliation" class="form-label">CNSS Affiliation</label>
+                    <input type="text" class="form-control" id="cnssAffiliation" formControlName="cnssAffiliation">
+                </div>
+                <div class="mb-3">
+                    <label for="cnssRate" class="form-label">CNSS Rate</label>
+                    <input type="text" class="form-control" id="cnssRate" formControlName="cnssRate">
+                </div>
+                <div class="mb-3">
+                    <label for="cssRate" class="form-label">CSS Rate</label>
+                    <input type="text" class="form-control" id="cssRate" formControlName="cssRate">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

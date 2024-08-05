@@ -1,0 +1,73 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <div class="main-body">
+          <div class="page-wrapper">
+            <!-- [ Main Content ] start -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Create Role</h5>
+                  </div>
+                  <div class="card-body">
+                    <form
+                      [formGroup]="myForm"
+                      (ngSubmit)="onSubmit()"
+                      class="mb-9"
+                    >
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="roleTitle"
+                          formControlName="roleTitle"
+                          pattern="[A-Za-z]+"
+                          required
+                          placeholder="ROLE TITLE"
+                        />
+                        <label for="roleTitle"></label>
+                        <div
+                          *ngIf="
+                            myForm.get('roleTitle')?.invalid &&
+                            (myForm.get('roleTitle')?.dirty ||
+                              myForm.get('roleTitle')?.touched)
+                          "
+                        >
+                          <span class="error-message"
+                            >Role Title must contain only uppercase and lowercase
+                            letters.</span
+                          >
+                        </div>
+                      </div>
+
+                      <div *ngFor="let privilege of privileges; let i = index">
+                        <label class="checkbox-label">
+                          <input
+                            class="styled-checkbox"
+                            type="checkbox"
+                            (change)="onprivilegeSelect(privilege, $event)"
+                          />
+                          {{ privilege.name }}
+                        </label>
+                      </div>
+
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        [disabled]="myForm.invalid"
+                      >
+                        Add
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

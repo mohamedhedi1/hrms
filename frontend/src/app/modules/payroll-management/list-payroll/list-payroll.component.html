@@ -1,0 +1,61 @@
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Payroll</h5>
+                                        <button class="btn btn-primary btn-sm float-right" [hidden]="isDate"
+                                            (click)="pay()">Add</button>
+                                    </div>
+                                    <input type="month" (change)="getDataByDate($event)" class="form-control">
+
+                                    <div class="card-body">
+                                        <h5></h5>
+                                        <hr>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Month</th>
+                                                    <th scope="col">First Name</th>
+                                                    <th scope="col">Last Name</th>
+                                                    <th scope="col">Basic Salary</th>
+                                                    <th scope="col">Net Salary</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of data; let i = index">
+                                                    <td>{{ item.month | date: 'MMM d, yyyy' }}</td>
+                                                    <td>{{ item.user?.firstname }}</td>
+                                                    <td>{{ item.user?.lastname }}</td>
+                                                    <td>{{ item.user?.basicSalary | number:'1.0-0' }}</td>
+                                                    <td>{{ item.netSalary | number:'1.0-0' }}</td>
+                                                    <td>
+                                                        <button class="btn btn-success btn-sm" (click)="print(item)">
+                                                            <i class="fas fa-print"></i> Print
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

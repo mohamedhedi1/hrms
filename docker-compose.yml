@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: angular_app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"  # Assuming Angular serves on port 80 in the container
+
+  backend:
+    container_name: nest_app
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./backend/nest
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=mongodb+srv://hrms:I9lOIMQX3SEtTZ9g@cluster0.zkuhzyx.mongodb.net/hrms
+    command: npm run start:dev

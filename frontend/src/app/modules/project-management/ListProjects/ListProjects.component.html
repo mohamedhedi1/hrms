@@ -1,0 +1,64 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="calendar-container">
+        <div cdkDropListGroup *ngIf="state">
+          <div class="example-container">
+            <h2>To do ({{ state.numProjectsTodo }})</h2>
+            <p-toast
+              [showTransformOptions]="'translateY(100%)'"
+              [showTransitionOptions]="'1000ms'"
+              [hideTransitionOptions]="'1000ms'"
+              [showTransformOptions]="'translateX(100%)'"
+            ></p-toast>
+            <div
+              cdkDropList
+              [cdkDropListData]="state.todo"
+              class="example-list"
+              (cdkDropListDropped)="handleDrop($event, 'ON_HOLD')"
+            >
+              @for (project of state.todo; track project) {
+              <div class="example-box" cdkDrag>
+                <app-projectCard [project]="project"></app-projectCard>
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="example-container">
+            <h2>Running ({{ state.numProjectsDone }})</h2>
+
+            <div
+              cdkDropList
+              [cdkDropListData]="state.done"
+              class="example-list"
+              (cdkDropListDropped)="handleDrop($event, 'RUNNING')"
+            >
+              @for (project of state.done; track project) {
+              <div class="example-box" cdkDrag>
+                <app-projectCard [project]="project"></app-projectCard>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="example-container">
+            <h2>Done ({{ state.numProjectsFinished }})</h2>
+
+            <div
+              cdkDropList
+              [cdkDropListData]="state.finished"
+              class="example-list"
+              (cdkDropListDropped)="handleDrop($event, 'FINISHED')"
+            >
+              @for (project of state.finished; track project) {
+              <div class="example-box" cdkDrag>
+                <app-projectCard [project]="project"></app-projectCard>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Edit Allowance</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="updateForm" *ngIf="updateForm">
+                <div class="form-group">
+                    <label for="date">Ammount:</label>
+                    <input type="number" class="form-control" value="" id="date" name="date"
+                        formControlName="ammountAllowance" placeholder="Tapez la date" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" value="" id="description" name="description"
+                        formControlName="descriptionAllowance" placeholder="Tapez la description" />
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select class="form-control" id="category" name="category" formControlName="categoryAllowance">
+                        <option value="FOOD">FOOD</option>
+                        <option value="TRANSPORTATION">TRANSPORTATION</option>
+                        <option value="LODGING">LODGING</option>
+                        <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                        <option value="MISCELLANEOUS">MISCELLANEOUS</option>
+
+
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+
+
+
+
+                <div class="modal-footer">
+                    <button type="submit" (click)="updateAllowance()" class="btn btn-primary" data-bs-dismiss="modal">
+                        Submit
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Input group -->
+</div>
+<!-- [ Main Content ] end -->

@@ -1,0 +1,112 @@
+<div class="pcoded-main-container" style="height: 80vh; overflow-y: auto;">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Add a task</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>Task Form</h5>
+                                        <hr>
+                                        <form #addForm="ngForm" (ngSubmit)="add(addForm)">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Title</mat-label>
+                                                            <input matInput type="text" id="title" name="title" ngModel required placeholder="Enter the title">
+                                                            <mat-error *ngIf="addForm.controls['title'].invalid && (addForm.controls['title'].dirty || addForm.controls['title'].touched)">Title is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Description</mat-label>
+                                                            <input matInput type="text" id="description" name="description" ngModel placeholder="Enter the description">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Priority</mat-label>
+                                                            <select matNativeControl id="priority" name="priority" ngModel required>
+                                                                <option value="" disabled>Select priority</option>
+                                                                <option value="LOW">Low</option>
+                                                                <option value="MEDIUM">Medium</option>
+                                                                <option value="HIGH">High</option>
+                                                            </select>
+                                                            <mat-error *ngIf="addForm.controls['priority'].invalid && (addForm.controls['priority'].dirty || addForm.controls['priority'].touched)">Priority is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Status</mat-label>
+                                                            <select matNativeControl id="status" name="status" ngModel required>
+                                                                <option value="" disabled>Select status</option>
+                                                                <option value="PENDING">Pending</option>
+                                                                <option value="IN_PROGRESS">In Progress</option>
+                                                                <option value="COMPLETED">Completed</option>
+                                                            </select>
+                                                            <mat-error *ngIf="addForm.controls['status'].invalid && (addForm.controls['status'].dirty || addForm.controls['status'].touched)">Status is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Assigned To</mat-label>
+                                                            <select matNativeControl id="assignedToEmail" name="assignedToEmail" ngModel required>
+                                                                <option value="" disabled>Select user</option>
+                                                                <option *ngFor="let user of users" [value]="user.email">{{ user.email }}</option>
+                                                            </select>
+                                                            <mat-error *ngIf="addForm.controls['assignedToEmail'].invalid && (addForm.controls['assignedToEmail'].dirty || addForm.controls['assignedToEmail'].touched)">Assigned To is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Created By</mat-label>
+                                                            <input matInput type="text" id="createBy" name="createBy" ngModel required placeholder="Enter the creator's name">
+                                                            <mat-error *ngIf="addForm.controls['createBy'].invalid && (addForm.controls['createBy'].dirty || addForm.controls['createBy'].touched)">Created By is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <!-- <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Created At</mat-label>
+                                                            <input matInput [matDatepicker]="createdAtPicker" placeholder="Choose a date and time" name="createdAt" ngModel required>
+                                                            <mat-datepicker-toggle matSuffix [for]="createdAtPicker"></mat-datepicker-toggle>
+                                                            <mat-datepicker #createdAtPicker></mat-datepicker>
+                                                            <mat-error *ngIf="addForm.controls['createdAt'].invalid && (addForm.controls['createdAt'].dirty || addForm.controls['createdAt'].touched)">Created At is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div> -->
+                                                    <div class="form-group">
+                                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                                            <mat-label>Deadline</mat-label>
+                                                            <input matInput [matDatepicker]="createdAtPicker" placeholder="Choose a date and time" name="deadline" id="deadline" ngModel required>
+                                                            <mat-datepicker-toggle matSuffix [for]="createdAtPicker"></mat-datepicker-toggle>
+                                                            <mat-datepicker #createdAtPicker></mat-datepicker>
+                                                            <mat-error *ngIf="addForm.controls['deadline'].invalid && (addForm.controls['deadline'].dirty || addForm.controls['deadline'].touched)">Deadline is required</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div mat-dialog-actions>
+                                                <button class="btn btn-danger btn-sm"(click)="closepopup()" mat-raised-button color="warn">Close</button>
+                                            <button type="submit" class="btn btn-primary" (click)="saveData()"[disabled]="!addForm.valid"> Submit </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

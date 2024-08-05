@@ -1,0 +1,289 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  email            String             @unique
+  firstname        String?
+  lastname         String?
+  address          String?
+  birthday         String?
+  degree           String?
+  number           Int?
+  job              String?
+  image            String?
+  hash             String
+  hashedAt         String?
+  hashedRt         String?
+  attendanceRecord AttendanceRecord[]
+  roleId           String[]           @db.ObjectId
+  roles            Role[]             @relation(fields: [roleId], references: [id])
+  basicSalary      Float?
+  offDays          Int?
+  payrolls         Payroll[]
+  familySituation  Int?
+  childrenNumber   Int?
+  bankrib          String?
+  numCnss          String?
+  cin              String?
+  tasks            Task[] //@relation(fields: [email], references: [assignedToEmail])
+  //taskId           String[]           @db.ObjectId
+  projectIds       String[]           @db.ObjectId
+  projects         Project[]          @relation(fields: [projectIds], references: [id])
+  smsEnabled       Boolean?
+  emailEnabled     Boolean?
+  allowances       Allowance[]
+  deductions       Deduction[]
+  isInMission      Boolean?
+  mission          Mission?           @relation(fields: [missionId], references: [id])
+  missionId        String?            @db.ObjectId
+  available        Boolean?           @default(true)
+
+  @@map("users")
+}
+
+model VerificationCode {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  code       String
+  email      String
+  expiryDate String
+}
+
+model Role {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String?
+  privilegeId String[]    @db.ObjectId
+  privileges  Privilege[] @relation(fields: [privilegeId], references: [id])
+
+  userId String[] @db.ObjectId
+  users  User[]   @relation(fields: [userId], references: [id])
+
+  @@map("roles")
+}
+
+model Privilege {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  roleId String[] @db.ObjectId
+  roles  Role[]   @relation(fields: [roleId], references: [id])
+
+  @@map("privileges")
+}
+
+model PasswordResetToken {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  token      String
+  email      String
+  expiryDate String
+}
+
+model Thread {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  threadId String    @unique
+  messages Message[]
+}
+
+model Message {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
+  thread   Thread @relation(fields: [threadId], references: [threadId])
+  threadId String
+  role     String
+}
+
+model Resume {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  url String
+}
+
+model AttendanceRecord {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  date          String
+  shiftType     ShiftType?
+  status        Status
+  absent_reason String?
+  user          User?      @relation(fields: [userId], references: [id])
+  userId        String?    @db.ObjectId
+}
+
+// Define enum for status
+model Payroll {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  user          User?    @relation(fields: [userId], references: [id])
+  userId        String?  @db.ObjectId
+  month         DateTime
+  taxableSalary Float
+  cnssdeduction Float
+  irpp          Float
+  css           Float
+  netSalary     Float
+}
+
+model Allowance {
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  user        User              @relation(fields: [userId], references: [id])
+  userId      String            @db.ObjectId
+  description String
+  category    AllowanceCategory
+  amount      Float
+  date        DateTime
+}
+
+enum AllowanceCategory {
+  FOOD
+  TRANSPORTATION
+  LODGING
+  ENTERTAINMENT
+  MISCELLANEOUS
+}
+
+model Deduction {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @db.ObjectId
+  description String
+  amount      Float
+  date        DateTime
+}
+
+model Notification {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  recipientId String
+  content     String
+  category    String
+  action      Int?
+  readAt      DateTime?
+  canceledAt  DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model Config {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  companyName        String
+  companyLogo        String
+  address            String
+  cnssAffiliation    String
+  payDay             Int
+  delayBeforePayment Int
+  cnssrate           Float
+  cssrate            Float
+}
+
+model Holiday {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  date     String
+  duration String
+  shift    Shift
+}
+
+model Department {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  Detail_department String?
+}
+
+enum Shift {
+  DAY_ONLY
+  NIGHT_ONLY
+  BOTH_SHIFTS
+}
+
+enum Status {
+  PRESENT
+  ABSENT
+}
+
+enum ShiftType {
+  FULL_DAY
+  HALF_DAY
+  QUARTER_SHIFT
+}
+
+model Task {
+  id              String       @id @default(auto()) @map("_id") @db.ObjectId
+  title           String       @unique
+  description     String?
+  priority        TaskPriority
+  status          TaskStatus
+  createBy        String
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  // usersIDs    String[]     @db.ObjectId
+  // users       User[]       @relation(fields: [usersIDs], references: [id])
+  assignedTo      User?        @relation(fields: [assignedToEmail], references: [email])
+  assignedToEmail String?      @map("assignedTo") //@db.String
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Project {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String
+  usersIds      String[]      @db.ObjectId
+  users         User[]        @relation(fields: [usersIds], references: [id])
+  leader        String
+  startDate     String
+  endDate       String
+  projectStatus ProjectStatus
+}
+
+enum ProjectStatus {
+  NEW
+  RUNNING
+  ON_HOLD
+  FINISHED
+}
+
+model Company {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  name     String?
+  location String?
+  //Mission  Mission[]
+}
+
+model Mission {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  title       String?
+  description String?
+  startDate   String?
+  endDate     String?
+  status      MissionStatus?
+  assignedTo  User[]
+  userId      String[]       @db.ObjectId
+  location    String?
+  client      String?        @db.ObjectId
+}
+
+enum MissionStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}

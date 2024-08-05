@@ -1,0 +1,109 @@
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Missions</h5>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-sm transparent-button " routerLink="add">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                                <path
+                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <mat-form-field>
+                                        <mat-label>Filter</mat-label>
+                                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mission title"
+                                            #input />
+                                    </mat-form-field>
+
+                                    <div class="mat-elevation-z8">
+                                        <table mat-table [dataSource]="dataSource" matSort>
+                                            <!-- ID Column -->
+                                            <ng-container matColumnDef="title">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+                                                <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+                                            </ng-container>
+
+                                            <!-- Description Column -->
+                                            <ng-container matColumnDef="description">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                                                <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+                                            </ng-container>
+
+                                            <!-- Start Date Column -->
+                                            <ng-container matColumnDef="startDate">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+                                                <td mat-cell *matCellDef="let row">{{ row.startDate }}</td>
+                                            </ng-container>
+
+                                            <!-- End Date Column -->
+                                            <ng-container matColumnDef="endDate">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+                                                <td mat-cell *matCellDef="let row">{{ row.endDate }}</td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="status">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                                                <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+                                            </ng-container>
+
+                                            <!-- Client Column -->
+                                            <ng-container matColumnDef="client">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
+                                                <td mat-cell *matCellDef="let row">
+                                                    {{ row.clientFirstName }} {{ row.clientLastName }}
+                                                </td>
+                                            </ng-container>
+
+                                            <!-- Actions Column -->
+                                            <ng-container matColumnDef="action">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                                                <td mat-cell *matCellDef="let row">
+                                                    <button type="button"
+                                                        class="btn btn-sm rounded-0 transparent-button1">
+                                                        <i class="fa fa-edit text-success"></i>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="btn btn-sm rounded-0 transparent-button1"
+                                                        (click)="deleteMission(row.id)">
+                                                        <i class="fas fa-trash red-icon"></i>
+                                                    </button>
+                                                </td>
+                                            </ng-container>
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                                            <!-- Row shown when there is no matching data. -->
+                                            <tr class="mat-row" *matNoDataRow>
+                                                <td class="mat-cell" colspan="6">
+                                                    No data matching the filter "{{ input.value }}"
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                                            aria-label="Select page of missions"></mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

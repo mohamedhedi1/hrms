@@ -1,0 +1,37 @@
+<div class="card" style="width: 18rem">
+  <div
+    class="card-header text-right"
+    [ngStyle]="{
+      'background-color': 'blueviolet'
+    }"
+  >
+    <!-- Content Here -->
+
+    <span
+      class="badge"
+      [ngClass]="{
+        'badge-danger': project.projectStatus == 'ON_HOLD',
+        'badge-primary': project.projectStatus == 'RUNNING',
+        'badge-success': project.projectStatus == 'FINISHED'
+      }"
+      >{{ project.projectStatus }}</span
+    >
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ project.leader }}</h5>
+    <p class="card-text">
+      {{ project.description }}
+    </p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong>Leader:</strong> {{ project.leader }}
+      </li>
+      <li class="list-group-item">
+        <strong>Start Date:</strong> {{ project.startDate }}
+      </li>
+      <li class="list-group-item">
+        <strong>End Date:</strong> {{ project.endDate }}
+      </li>
+    </ul>
+  </div>
+</div>

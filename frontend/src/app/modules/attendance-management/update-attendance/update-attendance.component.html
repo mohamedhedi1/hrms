@@ -1,0 +1,204 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card status-card">
+              <div class="card-body">
+                <h5 class="card-title">Type icons :</h5>
+                <div class="status-legend row">
+                  <div class="col-md-2 legend-item">
+                    <span
+                      class="holiday-icon bi bi-star-fill text-warning"
+                    ></span>
+                    <span>Weekend</span>
+                  </div>
+                  <div class="col-md-2 legend-item">
+                    <span class="far fa-check-circle text-success"></span>
+                    <span>Present - Full Day</span>
+                  </div>
+                  <div class="col-md-2 legend-item">
+                    <span class="bi bi-clock-history text-dark"></span>
+                    <span>Present - Quarter Shift</span>
+                  </div>
+                  <div class="col-md-2 legend-item">
+                    <span class="fas fa-adjust col-orange"></span>
+                    <span>Present - Half Day</span>
+                  </div>
+                  <div class="col-md-2 legend-item">
+                    <span class="far fa-times-circle text-danger"></span>
+                    <span>Absent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="calendar-container">
+        <div class="month-nav">
+          <button (click)="switchMonth(-1)" class="nav-button">
+            <span class="bi bi-arrow-left"></span>
+          </button>
+          <h2>{{ currentMonthYear }}</h2>
+          <button (click)="switchMonth(1)" class="nav-button">
+            <span class="bi bi-arrow-right"></span>
+          </button>
+        </div>
+        <div class="calendar">
+          <table>
+            <thead>
+              <tr>
+                <th>Name of Employee</th>
+                <ng-container *ngFor="let month of monthData">
+                  <th *ngFor="let day of month.days">
+                    {{ day }}
+                  </th>
+                </ng-container>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let employee of users">
+                <tr>
+                  <td class="employee-column">{{ employee.firstname }} {{employee.lastname}}</td>
+                  <ng-container *ngFor="let month of monthData">
+                    <td *ngFor="let day of month.days">
+                      @if (isWeekend(day)){
+                      <span
+                        class="holiday-icon bi bi-star-fill text-warning"
+                      ></span>
+                      } @else if( getStatusForDay(employee, day,
+                      month.monthIndex) === 'PRESENT' && getShiftTypeForDay(
+                      employee, day, month.monthIndex ) === 'FULL_DAY' &&
+                      !isWeekend(day)){
+                      <span
+                        class="far fa-check-circle text-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day, 'PRESENT')"
+                      ></span>
+
+                      } @else if (getStatusForDay(employee, day,
+                      month.monthIndex) === 'PRESENT' && getShiftTypeForDay(
+                      employee, day, month.monthIndex ) === 'QUARTER_SHIFT' &&
+                      !isWeekend(day) ){
+                      <span
+                        class="bi bi-clock-history text-dark"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day, 'PRESENT')"
+                      ></span>
+
+                      } @else if(getStatusForDay(employee, day,
+                      month.monthIndex) === 'PRESENT' && getShiftTypeForDay(
+                      employee, day, month.monthIndex ) === 'HALF_DAY' &&
+                      !isWeekend(day) ){
+
+                      <span
+                        class="fas fa-adjust col-orange"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day, 'PRESENT')"
+                      ></span>
+                      } @else if(getStatusForDay(employee, day,
+                      month.monthIndex) === 'ABSENT'){
+                      <span
+                        class="far fa-times-circle text-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day, 'ABSENT')"
+                      ></span>
+                      } @else {
+                      <span
+                        data-bs-toggle="modal"
+                        data-bs-target="#myModal"
+                        (click)="openModal(employee, day, '')"
+                        >-</span
+                      >
+                      }
+                      <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">Modal Heading</h4>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                              ></button>
+                            </div>
+                            <!-- Modal body -->
+                            <p>Select Shift type please :</p>
+                            <div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  id="quarterDayRadio"
+                                  name="durationRadio"
+                                  (change)="choose(0)"
+                                />
+                                <label for="quarterDayRadio">Absent</label>
+                              </div>
+                              <input
+                                type="radio"
+                                id="halfDayRadio"
+                                name="durationRadio"
+                                (change)="choose(1)"
+                              />
+                              <label for="halfDayRadio">Half Day</label>
+                            </div>
+                            <div>
+                              <input
+                                type="radio"
+                                id="quarterDayRadio"
+                                name="durationRadio"
+                                (change)="choose(2)"
+                              />
+                              <label for="quarterDayRadio">Quarter Day</label>
+                            </div>
+
+                            <div>
+                              <input
+                                type="radio"
+                                id="fullDayRadio"
+                                name="durationRadio"
+                                (change)="choose(3)"
+                              />
+                              <label for="fullDayRadio">Full Day</label>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+
+                              <button
+                                type="button"
+                                class="btn btn-primary"
+                                (click)="handleUpdate(selectedDuration)"
+                                data-bs-dismiss="modal"
+                              >
+                                Update
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>

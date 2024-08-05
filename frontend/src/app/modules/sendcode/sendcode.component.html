@@ -1,0 +1,29 @@
+<div class="auth-wrapper">
+    <div class="auth-content">
+        <div class="auth-bg">
+            <span class="r"></span>
+            <span class="r s"></span>
+            <span class="r s"></span>
+            <span class="r"></span>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="feather icon-settings auth-icon"></i>
+                </div>
+                <form [formGroup]="formRequest" (ngSubmit)="verify()">
+                <h3 class="mb-4">We sent you a verification code</h3>
+                <h5 class="mb-4">Please verifiy your {{method}}.<a (click)="resend()">Resend?</a></h5>
+                <p>Time left: {{ countdown | async }}</p>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="code" formControlName="code" required>
+                </div>
+                <button class="btn btn-primary mb-4 shadow-2" type="submit" [disabled]="!isValidCode()">Verify</button>
+                <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+            </form>
+              
+            </div>
+        </div>
+    </div>
+</div>

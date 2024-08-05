@@ -1,0 +1,88 @@
+
+    #chatContainer {
+        position: fixed;
+        bottom: 20px;
+        right: -350px;
+      }
+      
+      #toggleChatBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* CSS styles to hide the chat section */
+      .chat-hidden {
+        display: none;
+      }
+      .jumping-dots span {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        animation: jump 1s infinite;
+        display: inline-block;
+      }
+      
+      .jumping-dots .dot-1 {
+        background-color: #ED49FE;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 3px;
+        animation-delay: 200ms;
+      }
+      
+      .jumping-dots .dot-2 {
+        background-color: #ED49FE;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 3px;
+        animation-delay: 400ms;
+      }
+      
+      .jumping-dots .dot-3 {
+        background-color: #ED49FE;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 3px;
+        animation-delay: 600ms;
+      }
+      
+      @keyframes jump {
+        0% {
+          bottom: 0px;
+        }
+        20% {
+          bottom: 5px;
+        }
+        40% {
+          bottom: 0px;
+        }
+      }
+      
+
+
+.message.response-message.message-text2{
+  text-align: right
+}
+.message.input-message.message-text1{
+  text-align: left
+}
+.message {
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+}
